@@ -150,6 +150,8 @@ class TravelerController extends AbstractController
                 }
 
     }    
+ 
+
 ///*******************************************************<<Rutas Querys Travel>>**********************************************ª\\\\\
     #[Route('/travels/', name: 'travels')]
     public function travels(): Response

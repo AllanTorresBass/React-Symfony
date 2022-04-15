@@ -26,6 +26,8 @@ const TravelerTable = () => {
   const [deleteConfirmation, setDeleteConfirmation] = useState(false)
   const [deleteTravel, setDeleteTravel] = useState(false)
   const [showTravels, setShowTravel] = useState(false)
+  const [showMyTravel, setShowMyTravel] = useState(false)
+  const [myId, setMyId] = useState(0)
   
   
   function handleInput(e) {
@@ -81,16 +83,18 @@ const TravelerTable = () => {
         </Table>
           <Table>
             
-              <TableBody>
+              <TableHead>
               <TableRow>
-                    <TableCell align="center">Cedula</TableCell>
-                    <TableCell align="center">Nombre</TableCell>
-                    <TableCell align="center">fecha de nacimiento</TableCell>
-                    <TableCell align="center">Teléfono</TableCell>
+                    <TableCell align="center"  style={{fontSize:17}}>Cedula</TableCell>
+                    <TableCell align="center"  style={{fontSize:17}}>Nombre</TableCell>
+                    <TableCell align="center"  style={{fontSize:17}}>fecha de nacimiento</TableCell>
+                    <TableCell align="center"  style={{fontSize:17}}>Teléfono</TableCell>
                
                     <TableCell align="center">Action</TableCell>
+               
                   </TableRow>
-                       
+             </TableHead>     
+             <TableBody> 
                             {context.travel.slice().reverse().map((e,i)=>
                                 { let current=e;
                                     
@@ -115,7 +119,7 @@ const TravelerTable = () => {
                                           
                                           
                                           <TableCell align="center">
-                                            <IconButton>
+                                            <IconButton onClick={()=>{setShowMyTravel(e.id);setMyId(e.id)}}>
                                                <FormatListBulletedIcon/>
                                             </IconButton>
                                             <IconButton onClick={()=>setShowTravel(true)}>
@@ -153,8 +157,93 @@ const TravelerTable = () => {
                       )}
               </TableBody>
           </Table>
-        </form>   
+        </form>  
+
+
         <DeleteDialog deleteTravel={deleteTravel} open={deleteConfirmation} setDeleteConfirmation={setDeleteConfirmation} travelerFlag="true"/> 
+       {
+
+        showMyTravel
+        ?(
+          <div style={{
+            position: 'fixed',
+             display: 'flex',
+            zIndex:999,
+            top:0,
+            left:0,
+            width:'100%',
+            minHeight:'100vh',
+            backgroundColor:'rgba(0,0,0,0.75)',
+             
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+              <div style={{
+                  position:'absolute',
+                
+                
+                 width: '60%',
+                 
+                 height: '70%',
+                 overflowY:'auto',
+                 backgroundColor: '#fff',
+              }}  >
+               <button onClick={()=>setShowMyTravel(false)} style={{marginLeft:'95%',cursor:'pointer'}} className="modal-close"   >X</button>
+              
+            <Table style={{alignContent:'center'}}> 
+              <TableHead>
+                  <TableRow>
+                  <TableCell align="center" style={{fontSize:17}}>Codigo</TableCell>
+                  <TableCell style={{fontSize:17}}>Nª Plazas</TableCell>
+                
+                  <TableCell align="center" style={{fontSize:17}}>Origen</TableCell>
+                  <TableCell align="center" style={{fontSize:17}}>Destino</TableCell>
+                  <TableCell align="center" style={{fontSize:17}}>Precio</TableCell>
+                  
+                  </TableRow>
+              </TableHead>
+              <TableBody> 
+              {
+
+              context.travelers.map((e,i)=>{
+
+              if(e.viajero_id===myId)return( 
+              <TableRow key={i}>  
+                    <TableCell align="center">
+                      {e.cod_viaje}
+                    </TableCell>
+                    <TableCell align="center">
+                      {e.num_plazas}
+                    </TableCell>
+                    
+                    <TableCell align="center">
+                      {e.lugar_origen}
+                    </TableCell>
+                    <TableCell align="center">
+                      {e.destino}
+                    </TableCell>
+                    <TableCell align="center">
+                      {e.precio}
+                    </TableCell>
+             </TableRow>
+                  ) 
+                  })
+
+                  } 
+              </TableBody>
+             </Table> 
+                          
+             </div>
+           
+           </div> 
+        )
+
+        :(<></>)
+
+       }
+      
+     
+     
       {
         showTravels
         ?(
@@ -175,7 +264,7 @@ const TravelerTable = () => {
                 position:'absolute',
               
               
-               width: '60%',
+               width: '80%',
                
                height: '70%',
                overflowY:'auto',
@@ -183,6 +272,10 @@ const TravelerTable = () => {
             }}  >
 			       <button onClick={()=>setShowTravel(false)} style={{marginLeft:'95%',cursor:'pointer'}} className="modal-close"   >X</button>
              <TravelTable/>
+        
+         
+        
+
 			   </div>
            
           </div> 
@@ -247,3 +340,6 @@ InputProps={{
 
 }}
 /> */}
+
+
+
