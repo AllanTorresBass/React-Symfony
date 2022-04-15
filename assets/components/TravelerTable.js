@@ -1,3 +1,4 @@
+ 
 
 import React,  { useContext, useState,useEffect } from 'react'
 import Table from '@mui/material/Table';
@@ -11,16 +12,20 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import AddIcon from '@mui/icons-material/Add';
+import FlightIcon from '@mui/icons-material/Flight';
  import { TravelerContext } from '../contexts/TravelerContext'
   import TextField  from '@mui/material/TextField'
+  import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DeleteDialog from './DeleteDialog';
-const TravelTable = () => {
+import TravelTable from './TravelTable';
+const TravelerTable = () => {
   const context = useContext(TravelerContext)
   const [addTravel, setAddTravel] = useState({cedula: '', nombre: '', fecha_nacimiento: '', tlf: ''})
   const [editShow, setEditShow] = useState('')
   const [editTravel, setEditTravel] = useState('')
   const [deleteConfirmation, setDeleteConfirmation] = useState(false)
   const [deleteTravel, setDeleteTravel] = useState(false)
+  const [showTravels, setShowTravel] = useState(false)
   
   
   function handleInput(e) {
@@ -30,7 +35,7 @@ const TravelTable = () => {
   }
  //console.log(addTravel)
   return (
-<>    
+<>     
         <form onSubmit={(e)=>{context.createTraveler(e,{viajero: addTravel});setAddTravel({cedula: '', nombre: '', fecha_nacimiento: '', tlf: ''});}}>  
         <Table>
    
@@ -110,6 +115,12 @@ const TravelTable = () => {
                                           
                                           
                                           <TableCell align="center">
+                                            <IconButton>
+                                               <FormatListBulletedIcon/>
+                                            </IconButton>
+                                            <IconButton onClick={()=>setShowTravel(true)}>
+                                              <FlightIcon/>
+                                            </IconButton>
                                               <IconButton onClick={()=>{setEditShow(e.id);
                                                 setAddTravel({id:e.id,cedula: e.cedula, nombre: e.nombre, fecha_nacimiento: e.fecha_nacimiento, tlf: e.tlf})
                                                 }}>
@@ -144,11 +155,48 @@ const TravelTable = () => {
           </Table>
         </form>   
         <DeleteDialog deleteTravel={deleteTravel} open={deleteConfirmation} setDeleteConfirmation={setDeleteConfirmation} travelerFlag="true"/> 
+      {
+        showTravels
+        ?(
+        <div style={{
+          position: 'fixed',
+           display: 'flex',
+          zIndex:999,
+          top:0,
+          left:0,
+          width:'100%',
+          minHeight:'100vh',
+          backgroundColor:'rgba(0,0,0,0.75)',
+           
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+            <div style={{
+                position:'absolute',
+              
+              
+               width: '60%',
+               
+               height: '70%',
+               overflowY:'auto',
+               backgroundColor: '#fff',
+            }}  >
+			       <button onClick={()=>setShowTravel(false)} style={{marginLeft:'95%',cursor:'pointer'}} className="modal-close"   >X</button>
+             <TravelTable/>
+			   </div>
+           
+          </div> 
+        )
+        :(<></> )
+      }
+  
+  
+  
   </> 
   )
 }
 
-export default TravelTable
+export default TravelerTable
 {/* <TableCell>
 {editShow===e.id
 ?(<TextField 
