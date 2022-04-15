@@ -50,8 +50,38 @@ export const TravelerContext= createContext();
         //  setTravelers({...travelers,viajes:[...travelers.viajes,viaje]});
           
     }
-    const createTraveler=(props)=>{
-
+    const createTraveler=(e,viajero)=>{
+      e.preventDefault();
+    
+     if(viajero.viajero.cedula==='' || viajero.viajero.nombre==='' || viajero.viajero.fecha_nacimiento==='' || viajero.viajero.tlf===''){return alert('No puede haber campos vacios')}
+    
+   
+        let cedula=viajero.viajero.cedula;
+        let nombre=viajero.viajero.nombre;
+        let fecha_nacimiento=viajero.viajero.fecha_nacimiento;
+        let tlf=viajero.viajero.tlf;
+        
+  
+     axios.get('/travelers/create/'+cedula+'/'+nombre+'/'+fecha_nacimiento+'/'+tlf)
+     .then(res=>{
+  
+           ////Petición para leer toda la infomacions de lo viajeros guardados
+           axios.get('https://127.0.0.1:8000/travelers/')
+           .then(res=>{
+       
+            //  console.log(res.data);
+             setTravel(res.data)
+           
+           }).catch(err=>{
+             console.log(err)
+           })
+     
+     }).catch(err=>{
+       console.log(err)
+     })
+    
+      
+           
     }
  
  
@@ -80,7 +110,7 @@ export const TravelerContext= createContext();
          })
          
       },[])
-       console.log(travel)
+      // console.log(travel)
       const readTraveler=(props)=>{
           
     }
@@ -115,8 +145,30 @@ export const TravelerContext= createContext();
    
         
    }
-   const updateTraveler=(props)=>{
-          
+   const updateTraveler=({viajero,id})=>{
+              // return console.log(viajero)   
+    let cedula= viajero.cedula;
+    let nombre= viajero.nombre;
+    let fecha_nacimiento= viajero.fecha_nacimiento;
+    let tlf= viajero.tlf;
+     
+    axios.get('/traveler/update/'+cedula+'/'+nombre+'/'+fecha_nacimiento+'/'+tlf+'/'+id)
+    .then(res=>{
+ 
+            axios.get('https://127.0.0.1:8000/travelers/')
+            .then(res=>{
+        
+            //  console.log(res.data);
+              setTravel(res.data)
+            
+            }).catch(err=>{
+              console.log(err)
+            })
+              
+    }).catch(err=>{
+      console.log(err)
+    })
+
    }
    //delete
    const deleteTravel=({id,viaje})=>{
@@ -155,8 +207,29 @@ export const TravelerContext= createContext();
 
  
    }
-   const deleteTraveler=()=>{
-          
+   const deleteTraveler=({viajero,id})=>{
+                    //  return console.log('viajero')   
+    let cedula= viajero.cedula;
+    let nombre= viajero.nombre;
+    let fecha_nacimiento= viajero.fecha_nacimiento;
+    let tlf= viajero.tlf;
+     
+    axios.get('/traveler/delete/'+cedula+'/'+nombre+'/'+fecha_nacimiento+'/'+tlf+'/'+id)
+    .then(res=>{
+ 
+            axios.get('https://127.0.0.1:8000/travelers/')
+            .then(res=>{
+        
+            //  console.log(res.data);
+              setTravel(res.data)
+            
+            }).catch(err=>{
+              console.log(err)
+            })
+              
+    }).catch(err=>{
+      console.log(err)
+    })
    }
 
 

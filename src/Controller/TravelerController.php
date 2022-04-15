@@ -52,6 +52,104 @@ class TravelerController extends AbstractController
             'path' => 'src/Controller/TravelerController.php',
         ]);
     }
+   //////////////////<<<Create Travelers>>>>
+   #[Route('/travelers/create/{cedula}/{nombre}/{fecha_nacimiento}/{tlf}', name: 'CreateTravelers',methods:['get','HEAD'])]
+    
+   public function createTravelers($cedula,$nombre,$fecha_nacimiento,$tlf):Response
+   { 
+          $viajero = new Viajero();
+           
+   
+          $viajero->setCedula($cedula);
+          $viajero->setNombre($nombre);
+          $viajero->setFechaNacimiento($fecha_nacimiento);
+          $viajero->setTlf($tlf);
+          
+          $this->en->persist($viajero);
+          $this->en->flush();
+          
+
+  
+      
+ try{    
+         
+      
+        
+
+          return $this->json([
+           'messsage' => 'Ok, se guardo con extio.',
+           'viaje'=>$viajero->toArrayT(),
+            
+           
+            
+       ]);
+ }catch(Exception){
+           return $this->json([
+               'Error' => 'Critical Error...',
+               
+                   ]);
+           }
+
+      
+   }
+
+//////////////////////////<<UPDATE>>>>//////////////////////////////////////// 
+#[Route('/traveler/update/{cedula}/{nombre}/{fecha_nacimiento}/{tlf}/{id}', name: 'updateTraveler',methods:['get','HEAD'])]
+    public function updatTraveler($cedula,$nombre,$fecha_nacimiento,$tlf,$id) 
+    {
+        $repository=$this->en->getRepository(Viajero::class);
+        $viajero=$repository->find($id);
+       
+       
+        $viajero->setCedula($cedula);
+        $viajero->setNombre($nombre);
+        $viajero->setFechaNacimiento($fecha_nacimiento);
+        $viajero->setTlf($tlf);
+           $this->en->flush();
+
+        // dd($viaje);
+                try{
+                return $this->json([
+                            'message' => 'Se ha actualizádo',
+                            'path' =>   $id,
+                        ]);
+                }catch(Exception $exception){
+                    return $this->json([
+                        'Error' => 'Critical Error...',
+                        
+                            ]);
+                }
+
+    }
+//////////////////////////////<<<<<DELETE>>>>>>>>>>>>/////////////////////////////////////////////////////////////////
+ #[Route('/traveler/delete/{cedula}/{nombre}/{fecha_nacimiento}/{tlf}/{id}', name: 'deleteTraveler',methods:['get','HEAD'])]
+    public function deleteTraveler($cedula,$nombre,$fecha_nacimiento,$tlf,$id) 
+    {
+        $repository=$this->en->getRepository(Viajero::class);
+        $viajero=$repository->find($id);
+       
+       
+        $viajero->setCedula($cedula);
+        $viajero->setNombre($nombre);
+        $viajero->setFechaNacimiento($fecha_nacimiento);
+        $viajero->setTlf($tlf);
+           $this->en->remove($viajero);
+           $this->en->flush();
+
+    //   dd($viaje);
+                try{
+                return $this->json([
+                            'message' => 'Se ha actualizádo',
+                            'path' =>  $cedula,
+                        ]);
+                }catch(Exception $exception){
+                    return $this->json([
+                        'Error' => 'Critical Error...',
+                        
+                            ]);
+                }
+
+    }    
 ///*******************************************************<<Rutas Querys Travel>>**********************************************ª\\\\\
     #[Route('/travels/', name: 'travels')]
     public function travels(): Response
@@ -103,7 +201,7 @@ class TravelerController extends AbstractController
         $viaje=$repository->find($id);
             
     
-              $viaje->setCodViaje($cod_viaje);
+           $viaje->setCodViaje($cod_viaje);
            $viaje->setNumPlazas($num_plazas);
            $viaje->setDestino($destino);
            $viaje->setLugarOrigen($lugar_origen);
@@ -139,6 +237,7 @@ class TravelerController extends AbstractController
         ]);
     }
 
+ //////////////////<<<Create Travels>>>>
       #[Route('/travels/create/{cod_viaje}/{num_plazas}/{lugar_origen}/{destino}/{precio}', name: 'Create',methods:['get','HEAD'])]
     
     public function create($cod_viaje,$num_plazas,$lugar_origen,$destino,$precio):Response

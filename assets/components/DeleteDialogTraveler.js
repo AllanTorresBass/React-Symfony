@@ -14,27 +14,8 @@ const DeleteDialog = (props) => {
   return (
     <Dialog fullWidth={true} maxWidth='sm' open={props.open}>
       <DialogTitle>Esta seguro de que desea eliminar el viaje</DialogTitle>
-    {props.travelerFlag==="false"
-    ?(
-      <>
-      <DialogContent>
-             Codigo: {props.deleteTravel.cod_viaje} Destino: {props.deleteTravel.destino}
-      </DialogContent>
-        <DialogActions>
-              <button onClick={hide}>Cancel</button>
-             <button onClick={()=>{
-                    hide();
-                   context.deleteTravel({id:props.deleteTravel.id,viaje:{cod_viaje:props.deleteTravel.cod_viaje, num_plazas:props.deleteTravel.num_plazas,lugar_origen:props.deleteTravel.lugar_origen,destino:props.deleteTravel.destino,precio:props.deleteTravel.precio}});
-                  
-                    }
-                   }>Delete</button>   
-      </DialogActions> 
-      </>
-    )
-    :(<>
-         
        <DialogContent>
-             Cedula: {props.deleteTravel.cedula} {'\n'}Nombre: {props.deleteTravel.nombre}
+             Cedula: {props.deleteTravel.Cedula} {'\n'}Nombre: {props.deleteTravel.destino}
       </DialogContent>
         <DialogActions>
               <button onClick={hide}>Cancel</button>
@@ -45,45 +26,24 @@ const DeleteDialog = (props) => {
                     }
                    }>Delete</button>   
       </DialogActions>    
-    </>)
-    }
-       
-
     </Dialog>
   )
 }
 DeleteDialog.proptypes={
     open: PropTypes.bool.isRequired,
     setDeleteConfirmation:PropTypes.func.isRequired,
-    travelerFlag:PropTypes.string,
     deleteTravel:PropTypes.shape=({
         id:PropTypes.number,
-        cod_viaje:PropTypes.string,
+        cedula:PropTypes.string,
                                                                          
                                                                           
-        num_plazas: PropTypes.number,
+        nombre:PropTypes.string,
       
      
-        lugar_origen:PropTypes.string,
+        fecha_nacimiento:PropTypes.string,
      
       
-        destino:PropTypes.string,
-     
-      
-        precio:PropTypes.number
-    }),
-    deleteTravel:PropTypes.shape=({
-      id:PropTypes.number,
-      cedula:PropTypes.string,
-                                                                       
-                                                                        
-      nombre:PropTypes.string,
-    
-   
-      fecha_nacimiento:PropTypes.string,
-   
-    
-      tlf:PropTypes.string,
-  })
+        tlf:e.tlf,
+    })
 }
 export default DeleteDialog

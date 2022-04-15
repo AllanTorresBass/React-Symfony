@@ -151,7 +151,7 @@ const TravelTable = () => {
               </TableBody>
           </Table>
         </form>   
-        <DeleteDialog deleteTravel={deleteTravel} open={deleteConfirmation} setDeleteConfirmation={setDeleteConfirmation}/> 
+        <DeleteDialog deleteTravel={deleteTravel} open={deleteConfirmation} setDeleteConfirmation={setDeleteConfirmation} travelerFlag="false"/> 
   </> 
   )
 }

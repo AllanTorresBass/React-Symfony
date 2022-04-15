@@ -16,16 +16,12 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteDialog from './DeleteDialog';
 const TravelTable = () => {
   const context = useContext(TravelerContext)
-  const [addTravel, setAddTravel] = useState({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''})
+  const [addTravel, setAddTravel] = useState({cedula: '', nombre: '', fecha_nacimiento: '', tlf: ''})
   const [editShow, setEditShow] = useState('')
   const [editTravel, setEditTravel] = useState('')
   const [deleteConfirmation, setDeleteConfirmation] = useState(false)
   const [deleteTravel, setDeleteTravel] = useState(false)
-  // useEffect(function () {
-  //   console.log('render!')
-  // },[])
-   console.log(context.travel)
-  // console.log(addTravel)
+  
   
   function handleInput(e) {
    
@@ -35,32 +31,32 @@ const TravelTable = () => {
  //console.log(addTravel)
   return (
 <>    
-        <form onSubmit={(e)=>{context.createTravel(e,{viaje: addTravel});setAddTravel({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''});}}>  
+        <form onSubmit={(e)=>{context.createTraveler(e,{viajero: addTravel});setAddTravel({cedula: '', nombre: '', fecha_nacimiento: '', tlf: ''});}}>  
         <Table>
    
            <TableHead>
                 <TableRow>
                   <TableCell>
-                     <TextField name="cedula"  value={addTravel.cod_viaje} onChange={(e)=>handleInput(e)} id="outlined-basic" style={{width:'23.5%'}} label="Cedula"  /> 
+                     <TextField name="cedula"  value={addTravel.cedula} onChange={(e)=>handleInput(e)} id="outlined-basic" style={{width:'22.5%'}} label="Cedula"  /> 
                  
-                     <TextField name="nombre" value={addTravel.num_plazas}  type='number'   onChange={(e)=>handleInput(e)} id="num_plazas" style={{width:'23.5%'}} label="Nombre"   /> 
+                     <TextField name="nombre" value={addTravel.nombre}    onChange={(e)=>handleInput(e)}   style={{width:'22.5%'}} label="Nombre"   /> 
                   
-                     <TextField name="fecha_nacimiento" value={addTravel.origen} onChange={(e)=>handleInput(e)}  style={{width:'23.5%'}} label="Fecha de nacimiento"/> 
+                     <TextField name="fecha_nacimiento" value={addTravel.fecha_nacimiento} onChange={(e)=>handleInput(e)}  style={{width:'22.5%'}} label="Fecha de nacimiento"/> 
                 
-                     <TextField name="tlf" value={addTravel.lugar_destino} onChange={(e)=>handleInput(e)} id="outlined-basic" style={{width:'23.5%'}} label="Telefono"    /> 
+                     <TextField name="tlf" value={addTravel.tlf} onChange={(e)=>handleInput(e)} id="outlined-basic" style={{width:'22.5%'}} label="Telefono"    /> 
                  
                       
                 {editShow
                  ?(     <span style={{flex:1,flexDirection:'row',width:'3%',top:-10}}>
                   <IconButton onClick={()=>{
-                          context.updateTravel({id:editShow,viaje:addTravel})
+                          context.updateTraveler({id:editShow,viajero:addTravel})
                           setEditShow('');setEditTravel('');
-                          setAddTravel({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''});
-                          }} style={{flex:1,width:'5%'}}><DoneIcon style={{flex:1,width:'10%',height:'30%'}}/></IconButton>
+                          setAddTravel({cedula: '', nombre: '', fecha_nacimiento: '', tlf: ''});
+                          }} style={{flex:1,width:'5%'}}><DoneIcon style={{flex:1,width:'8%',height:'30%'}}/></IconButton>
                   <IconButton onClick={()=>{
                         setEditShow('');
-                         setAddTravel({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''});
-                  }} style={{flex:1,width:'5%'}}><CloseIcon style={{flex:1,width:'10%',height:'30%'}}/></IconButton>
+                         setAddTravel({cedula: '', nombre: '', fecha_nacimiento: '', tlf: ''});
+                  }} style={{flex:1,width:'5%'}}><CloseIcon style={{flex:1,width:'8%',height:'30%'}}/></IconButton>
                   </span>
                 
                 )
@@ -92,7 +88,7 @@ const TravelTable = () => {
                        
                             {context.travel.slice().reverse().map((e,i)=>
                                 { let current=e;
-                                     
+                                    
                                     return(<TableRow key={i} >
                                       
                                         <>     
@@ -115,7 +111,7 @@ const TravelTable = () => {
                                           
                                           <TableCell align="center">
                                               <IconButton onClick={()=>{setEditShow(e.id);
-                                                setAddTravel({id:e.id,cod_viaje: e.cod_viaje, num_plazas: e.num_plazas, origen: e.lugar_origen, lugar_destino: e.destino, precio: e.precio})
+                                                setAddTravel({id:e.id,cedula: e.cedula, nombre: e.nombre, fecha_nacimiento: e.fecha_nacimiento, tlf: e.tlf})
                                                 }}>
                                                   <EditIcon />
                                               </IconButton>
@@ -123,16 +119,16 @@ const TravelTable = () => {
                                               <IconButton onClick={()=>{setDeleteConfirmation(true); setDeleteTravel({
                                                                             id:e.id,
                                                                            
-                                                                            cod_viaje:e.cod_viaje,
+                                                                            cedula:e.cedula,
                                                                          
                                                                           
-                                                                            num_plazas: e.num_plazas,
+                                                                            nombre: e.nombre,
                                                                           
                                                                          
-                                                                            lugar_origen:e.lugar_origen,
+                                                                            fecha_nacimiento:e.fecha_nacimiento,
                                                                          
                                                                           
-                                                                            destino:e.destino,
+                                                                            tlf:e.tlf,
                                                                          
                                                                           
                                                                           
@@ -147,7 +143,7 @@ const TravelTable = () => {
               </TableBody>
           </Table>
         </form>   
-        <DeleteDialog deleteTravel={deleteTravel} open={deleteConfirmation} setDeleteConfirmation={setDeleteConfirmation}/> 
+        <DeleteDialog deleteTravel={deleteTravel} open={deleteConfirmation} setDeleteConfirmation={setDeleteConfirmation} travelerFlag="true"/> 
   </> 
   )
 }
