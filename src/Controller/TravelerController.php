@@ -239,10 +239,10 @@ class TravelerController extends AbstractController
         ]);
     }
 
- //////////////////<<<Create Travels>>>>
-      #[Route('/travels/create/{cod_viaje}/{num_plazas}/{lugar_origen}/{destino}/{precio}', name: 'Create',methods:['get','HEAD'])]
+ //////////////////<<<Create Travels>>>>////////////////////////////
+      #[Route('/travels/create/{cod_viaje}/{num_plazas}/{lugar_origen}/{destino}/{precio}/{viajero_id}', name: 'Create',methods:['get','HEAD'])]
     
-    public function create($cod_viaje,$num_plazas,$lugar_origen,$destino,$precio):Response
+    public function create($cod_viaje,$num_plazas,$lugar_origen,$destino,$precio,$viajero_id):Response
     { 
            $viaje = new Viaje();
             
@@ -252,7 +252,7 @@ class TravelerController extends AbstractController
            $viaje->setDestino($destino);
            $viaje->setLugarOrigen($lugar_origen);
            $viaje->setPrecio($precio);
-           $viaje->setViajeroId(12);
+           $viaje->setViajeroId($viajero_id);
            $this->en->persist($viaje);
            $this->en->flush();
            

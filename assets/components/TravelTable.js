@@ -14,7 +14,7 @@ import AddIcon from '@mui/icons-material/Add';
  import { TravelerContext } from '../contexts/TravelerContext'
   import TextField  from '@mui/material/TextField'
 import DeleteDialog from './DeleteDialog';
-const TravelTable = () => {
+const TravelTable = ({myId}) => {
   const context = useContext(TravelerContext)
   const [addTravel, setAddTravel] = useState({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''})
   const [editShow, setEditShow] = useState('')
@@ -32,10 +32,10 @@ const TravelTable = () => {
     setAddTravel({ ...addTravel, [e.target.name]: e.target.value });
     
   }
- //console.log(addTravel)
+  
   return (
 <>    
-        <form onSubmit={(e)=>{context.createTravel(e,{viaje: addTravel});setAddTravel({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''});}}>  
+        <form onSubmit={(e)=>{context.createTravel(e,{viaje: addTravel},myId.myId);setAddTravel({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''});}}>  
         <Table>
    
            <TableHead>
@@ -94,8 +94,8 @@ const TravelTable = () => {
                        
                             {context.travelers.slice().reverse().map((e,i)=>
                                 { let current=e;
-                                     
-                                    return(<TableRow key={i} >
+                                      
+                                 if(e.viajero_id=== myId.myId) return(<TableRow key={i} >
                                       
                                         <>     
                                           <TableCell align="center">

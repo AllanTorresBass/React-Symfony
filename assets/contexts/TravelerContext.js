@@ -21,7 +21,8 @@ export const TravelerContext= createContext();
       //  );
 
    //create
-    const createTravel=(e,viaje)=>{
+    const createTravel=(e,viaje,viajero_id)=>{
+      // return console.log(viajero_id)
       e.preventDefault();
     console.log(viaje.viaje)
    if(parseInt(viaje.viaje.num_plazas)<0 || parseInt(viaje.viaje.num_plazas)===0){return alert('El numero de plazas debe ser mayor a 0')}
@@ -33,7 +34,7 @@ export const TravelerContext= createContext();
       let destino=viaje.viaje.lugar_destino;
       let precio=viaje.viaje.precio;
 
-   axios.get('/travels/create/'+cod_viaje+'/'+num_plazas+'/'+lugar_origen+'/'+destino+'/'+precio)
+   axios.get('/travels/create/'+cod_viaje+'/'+num_plazas+'/'+lugar_origen+'/'+destino+'/'+precio+'/'+viajero_id)
    .then(res=>{
 
      console.log(res.data.viaje);

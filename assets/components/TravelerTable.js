@@ -30,6 +30,7 @@ const TravelerTable = () => {
   const [myId, setMyId] = useState(0)
   
   
+  
   function handleInput(e) {
    
     setAddTravel({ ...addTravel, [e.target.name]: e.target.value });
@@ -116,13 +117,16 @@ const TravelerTable = () => {
                                       
                                          </>  
                                        
-                                          
+                                        {/* Icons Actions */}
                                           
                                           <TableCell align="center">
                                             <IconButton onClick={()=>{setShowMyTravel(e.id);setMyId(e.id)}}>
                                                <FormatListBulletedIcon/>
                                             </IconButton>
-                                            <IconButton onClick={()=>setShowTravel(true)}>
+                                            <IconButton onClick={()=>{
+                                                     setShowTravel(true)
+                                                     setMyId(e.id)
+                                                     }}>
                                               <FlightIcon/>
                                             </IconButton>
                                               <IconButton onClick={()=>{setEditShow(e.id);
@@ -271,7 +275,7 @@ const TravelerTable = () => {
                backgroundColor: '#fff',
             }}  >
 			       <button onClick={()=>setShowTravel(false)} style={{marginLeft:'95%',cursor:'pointer'}} className="modal-close"   >X</button>
-             <TravelTable/>
+             <TravelTable myId={{myId}}/>
         
          
         
@@ -290,56 +294,7 @@ const TravelerTable = () => {
 }
 
 export default TravelerTable
-{/* <TableCell>
-{editShow===e.id
-?(<TextField 
-    value={editTravel} 
-    onChange={(e)=>{setEditTravel(e.target.value)}} 
-    id="outlined-basic" 
-    label="Edit Viaje"   
-    fullWidth={true} 
-    InputProps={{
-      endAdornment:
-      <>
-      <IconButton onClick={()=>{
-              context.updateTravel({id:e.id,viaje:editTravel})
-              setEditShow('');setEditTravel('');
-              }}><DoneIcon/></IconButton>
-      <IconButton onClick={()=>{setEditShow('');setEditTravel('');}}><CloseIcon/></IconButton>
-      </>
-      ,
-    }}
-    />)
-:( 
-
-  e.cod_viaje
-
  
-)
-}
-
-</TableCell> */}
-{/* <TextField 
-value={editTravel} 
-onChange={(e)=>{setEditTravel(e.target.value)}} 
-id="outlined-basic" 
-label="Edit Viaje"   
-fullWidth={true} 
-InputProps={{
-  endAdornment:
-  <>
-  <IconButton onClick={()=>{
-          context.updateTravel({id:e.id,viaje:editTravel})
-          setEditShow('');setEditTravel('');
-          }}><DoneIcon/></IconButton>
-  <IconButton onClick={()=>{
-        setEditShow('');
-         setAddTravel({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''});
-  }}><CloseIcon/></IconButton>
-  </>
-
-}}
-/> */}
 
 
 
