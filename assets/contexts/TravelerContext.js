@@ -24,10 +24,10 @@ export const TravelerContext= createContext();
     const createTravel=(e,viaje,viajero_id)=>{
       // return console.log(viajero_id)
       e.preventDefault();
-    console.log(viaje.viaje)
+    
    if(parseInt(viaje.viaje.num_plazas)<0 || parseInt(viaje.viaje.num_plazas)===0){return alert('El numero de plazas debe ser mayor a 0')}
    if(parseInt(viaje.viaje.precio)<0 || parseInt(viaje.viaje.precio)===0){return alert('El precio debe ser mayor a 0')}
-  console.log(viaje.viaje)
+ 
       let cod_viaje=viaje.viaje.cod_viaje;
       let num_plazas=viaje.viaje.num_plazas;
       let lugar_origen=viaje.viaje.origen;
@@ -119,7 +119,8 @@ export const TravelerContext= createContext();
  
    //update
    const updateTravel=({viaje,id})=>{
-    // return console.log(viaje)   
+     
+    
     let cod_viaje= viaje.cod_viaje;
     let num_plazas= viaje.num_plazas;
     let lugar_origen= viaje.origen;

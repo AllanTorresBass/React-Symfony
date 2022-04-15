@@ -94,7 +94,7 @@ const TravelTable = ({myId}) => {
                        
                             {context.travelers.slice().reverse().map((e,i)=>
                                 { let current=e;
-                                      
+                                   if(current===''){return<TableCell> <h1>No hay viajes Registrados</h1></TableCell> }   
                                  if(e.viajero_id=== myId.myId) return(<TableRow key={i} >
                                       
                                         <>     
