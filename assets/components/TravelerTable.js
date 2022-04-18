@@ -185,36 +185,36 @@ const TravelerTable = () => {
           }}>
               <div style={{
                   position:'absolute',
-                
-                
+                  backgroundColor: 'rgb(202, 202, 202)',
+             
                  width: '60%',
                  
                  height: '70%',
                  overflowY:'auto',
-                 backgroundColor: '#fff',
+                 
               }}  >
                <button onClick={()=>setShowMyTravel(false)} style={{marginLeft:'95%',cursor:'pointer'}} className="modal-close"   >X</button>
               
             <Table style={{alignContent:'center'}}> 
               <TableHead>
-                  <TableRow>
-                  <TableCell align="center" style={{fontSize:17}}>Codigo</TableCell>
-                  <TableCell style={{fontSize:17}}>Nª Plazas</TableCell>
+                  <TableRow  className='thead'>
+                  <TableCell align="center"  className='color'>Codigo</TableCell>
+                  <TableCell align="center" className='color'>Nª Plazas</TableCell>
                 
-                  <TableCell align="center" style={{fontSize:17}}>Origen</TableCell>
-                  <TableCell align="center" style={{fontSize:17}}>Destino</TableCell>
-                  <TableCell align="center" style={{fontSize:17}}>Precio</TableCell>
+                  <TableCell align="center"  className='color'>Origen</TableCell>
+                  <TableCell align="center"  className='color'>Destino</TableCell>
+                  <TableCell align="center"  className='color'>Precio</TableCell>
                   
                   </TableRow>
               </TableHead>
-              <TableBody> 
+              <TableBody > 
               {
 
               context.travelers.map((e,i)=>{
 
               if(e.viajero_id===myId)return( 
-              <TableRow key={i}>  
-                    <TableCell align="center">
+              <TableRow key={i} style={{ backgroundColor: 'rgb(178, 182, 215)'}}>  
+                    <TableCell align="center" >
                       {e.cod_viaje}
                     </TableCell>
                     <TableCell align="center">
