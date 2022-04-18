@@ -1,4 +1,21 @@
 body {
+  
     background-color: lightgray;
+    font-style: oblique;
     
+}
+.thead{
+    background-color: rgb(67, 64, 64);
+    
+}
+.color{
+    color: lightgray;
+    font-size: 17px;
+}
+.background{
+    background-color: rgb(202, 202, 202);
+}
+
+.background2{
+    background-color: rgb(178, 182, 215);
 }

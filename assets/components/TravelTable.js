@@ -30,7 +30,7 @@ const TravelTable = ({myId}) => {
   }
   
   return (
-<>    
+<>  
         <form onSubmit={(e)=>{context.createTravel(e,{viaje: addTravel},myId.myId);setAddTravel({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''});}}>  
         <Table>
    
@@ -78,20 +78,22 @@ const TravelTable = ({myId}) => {
         </Table>
           <Table>
             
-              <TableBody>
-              <TableRow>
-                    <TableCell align="center">Codigo</TableCell>
-                    <TableCell align="center">Nº Plazas</TableCell>
-                    <TableCell align="center">Origen</TableCell>
-                    <TableCell align="center">Destino</TableCell>
-                    <TableCell align="center">Precio</TableCell>
-                    <TableCell align="center">Action</TableCell>
+              <TableHead>
+                 <TableRow  className='thead'>
+                    <TableCell align="center" className='color'>Codigo</TableCell>
+                    <TableCell align="center" className='color'>Nº Plazas</TableCell>
+                    <TableCell align="center" className='color'>Origen</TableCell>
+                    <TableCell align="center" className='color'>Destino</TableCell>
+                    <TableCell align="center" className='color'>Precio</TableCell>
+                    <TableCell align="center" className='color'>Action</TableCell>
                   </TableRow>
-                       
+                  </TableHead>
+                  <TableBody>  
                             {context.travelers.slice().reverse().map((e,i)=>
                                 { let current=e;
                                    if(current===''){return<TableCell> <h1>No hay viajes Registrados</h1></TableCell> }   
-                                 if(e.viajero_id=== myId.myId) return(<TableRow key={i} >
+                                 if(e.viajero_id=== myId.myId) return(
+                                 <TableRow key={i} className='background2'>
                                       
                                         <>     
                                           <TableCell align="center">

@@ -38,11 +38,12 @@ const TravelerTable = () => {
   }
  //console.log(addTravel)
   return (
-<>     
+<>       
+   <h1 align='center' className='background2'>Agregar Viajero</h1>
         <form onSubmit={(e)=>{context.createTraveler(e,{viajero: addTravel});setAddTravel({cedula: '', nombre: '', fecha_nacimiento: '', tlf: ''});}}>  
         <Table>
    
-           <TableHead>
+           <TableHead >
                 <TableRow>
                   <TableCell>
                      <TextField name="cedula"  value={addTravel.cedula} onChange={(e)=>handleInput(e)} id="outlined-basic" style={{width:'22.5%'}} label="Cedula"  /> 
@@ -84,14 +85,14 @@ const TravelerTable = () => {
         </Table>
           <Table>
             
-              <TableHead>
+              <TableHead className='thead'>
               <TableRow>
-                    <TableCell align="center"  style={{fontSize:17}}>Cedula</TableCell>
-                    <TableCell align="center"  style={{fontSize:17}}>Nombre</TableCell>
-                    <TableCell align="center"  style={{fontSize:17}}>fecha de nacimiento</TableCell>
-                    <TableCell align="center"  style={{fontSize:17}}>Teléfono</TableCell>
+                    <TableCell align="center" className='color' >Cedula</TableCell>
+                    <TableCell align="center" className='color'>Nombre</TableCell>
+                    <TableCell align="center" className='color' >fecha de nacimiento</TableCell>
+                    <TableCell align="center" className='color'>Teléfono</TableCell>
                
-                    <TableCell align="center">Action</TableCell>
+                    <TableCell  className='color' align="center">Action</TableCell>
                
                   </TableRow>
              </TableHead>     
@@ -99,7 +100,7 @@ const TravelerTable = () => {
                             {context.travel.slice().reverse().map((e,i)=>
                                 { let current=e;
                                     
-                                    return(<TableRow key={i} >
+                                    return(<TableRow key={i} className={i%2===0?'background':'background2'} >
                                       
                                         <>     
                                           <TableCell align="center">
@@ -119,7 +120,7 @@ const TravelerTable = () => {
                                        
                                         {/* Icons Actions */}
                                           
-                                          <TableCell align="center">
+                                          <TableCell align="center" >
                                             <IconButton onClick={()=>{setShowMyTravel(e.id);setMyId(e.id)}}>
                                                <FormatListBulletedIcon/>
                                             </IconButton>
