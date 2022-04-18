@@ -166,12 +166,12 @@ class TravelerController extends AbstractController
         return $this->json($arrayTravels);
     }
 //////////////////////////<<UPDATE>>>>//////////////////////////////////////// 
-#[Route('/travels/update/{cod_viaje}/{num_plazas}/{lugar_origen}/{destino}/{precio}/{id}', name: 'update',methods:['get','HEAD'])]
-    public function update($cod_viaje,$num_plazas,$lugar_origen,$destino,$precio,$id) 
+#[Route('/travels/update/{cod_viaje}/{num_plazas}/{lugar_origen}/{destino}/{precio}/{id}/{id_viaje}', name: 'update',methods:['get','HEAD'])]
+    public function update($cod_viaje,$num_plazas,$lugar_origen,$destino,$precio,$id,$id_viaje) 
     {
         $repository=$this->en->getRepository(Viaje::class);
-        $viaje=$repository->find($id);
-       
+        $viaje=$repository->find($id_viaje);
+      
        
            $viaje->setCodViaje($cod_viaje);
            $viaje->setNumPlazas($num_plazas);

@@ -119,25 +119,25 @@ export const TravelerContext= createContext();
  
    //update
    const updateTravel=({viaje,id})=>{
-     
-    
+  
+    let id_viaje =viaje.id;
     let cod_viaje= viaje.cod_viaje;
     let num_plazas= viaje.num_plazas;
     let lugar_origen= viaje.origen;
     let destino= viaje.lugar_destino;
     let precio= viaje.precio;
-    axios.get('/travels/update/'+cod_viaje+'/'+num_plazas+'/'+lugar_origen+'/'+destino+'/'+precio+'/'+id)
+    axios.get('/travels/update/'+cod_viaje+'/'+num_plazas+'/'+lugar_origen+'/'+destino+'/'+precio+'/'+id+'/'+id_viaje)
     .then(res=>{
  
-                axios.get('https://127.0.0.1:8000/travels/')
-                .then(res=>{
-            
-                //  console.log(res.data);
-                  setTravelers(res.data)
-                
-                }).catch(err=>{
-                  console.log(err)
-                })
+                  axios.get('https://127.0.0.1:8000/travels/')
+                  .then(res=>{
+              
+                  //  console.log(res.data);
+                    setTravelers(res.data)
+                  
+                  }).catch(err=>{
+                    console.log(err)
+                  })
               
     }).catch(err=>{
       console.log(err)

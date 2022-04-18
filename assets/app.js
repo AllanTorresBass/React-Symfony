@@ -21,7 +21,7 @@ import React from 'react'
   return (
    <TravelerContextProvider>
        <CssBaseline>
-        {/* <TravelTable /> */}
+        
        <TravelerTable />  
         </CssBaseline>     
    </TravelerContextProvider> 
@@ -30,8 +30,4 @@ import React from 'react'
   )
 }
 reactDom.render(<App/>,document.getElementById('root'))
-    {/*<travelerContextProvider>
-       <div>Allan</div>
-        <travelTable />
-        <travelerTable />    
-   </travelerContextProvider> */}
+    

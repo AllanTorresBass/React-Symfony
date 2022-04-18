@@ -21,11 +21,7 @@ const TravelTable = ({myId}) => {
   const [editTravel, setEditTravel] = useState('')
   const [deleteConfirmation, setDeleteConfirmation] = useState(false)
   const [deleteTravel, setDeleteTravel] = useState(false)
-  // useEffect(function () {
-  //   console.log('render!')
-  // },[])
-  // console.log(context.travelers)
-  // console.log(addTravel)
+ 
   
   function handleInput(e) {
    
@@ -118,7 +114,7 @@ const TravelTable = ({myId}) => {
                                           
                                           
                                           <TableCell align="center">
-                                              <IconButton onClick={()=>{setEditShow(e.id);
+                                              <IconButton onClick={()=>{setEditShow(myId.myId);
                                                 setAddTravel({id:e.id,cod_viaje: e.cod_viaje, num_plazas: e.num_plazas, origen: e.lugar_origen, lugar_destino: e.destino, precio: e.precio})
                                                 }}>
                                                   <EditIcon />
@@ -157,53 +153,4 @@ const TravelTable = ({myId}) => {
 }
 
 export default TravelTable
-{/* <TableCell>
-{editShow===e.id
-?(<TextField 
-    value={editTravel} 
-    onChange={(e)=>{setEditTravel(e.target.value)}} 
-    id="outlined-basic" 
-    label="Edit Viaje"   
-    fullWidth={true} 
-    InputProps={{
-      endAdornment:
-      <>
-      <IconButton onClick={()=>{
-              context.updateTravel({id:e.id,viaje:editTravel})
-              setEditShow('');setEditTravel('');
-              }}><DoneIcon/></IconButton>
-      <IconButton onClick={()=>{setEditShow('');setEditTravel('');}}><CloseIcon/></IconButton>
-      </>
-      ,
-    }}
-    />)
-:( 
-
-  e.cod_viaje
-
  
-)
-}
-
-</TableCell> */}
-{/* <TextField 
-value={editTravel} 
-onChange={(e)=>{setEditTravel(e.target.value)}} 
-id="outlined-basic" 
-label="Edit Viaje"   
-fullWidth={true} 
-InputProps={{
-  endAdornment:
-  <>
-  <IconButton onClick={()=>{
-          context.updateTravel({id:e.id,viaje:editTravel})
-          setEditShow('');setEditTravel('');
-          }}><DoneIcon/></IconButton>
-  <IconButton onClick={()=>{
-        setEditShow('');
-         setAddTravel({cod_viaje: '', num_plazas: '', origen: '', lugar_destino: '', precio: ''});
-  }}><CloseIcon/></IconButton>
-  </>
-
-}}
-/> */}
